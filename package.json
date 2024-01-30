@@ -1,0 +1,50 @@
+{
+  "name": "rexx",
+  "version": "0.0.3",
+  "description": "A human-friendly regex library with structured syntax and variable support.",
+  "keywords": [
+    "regex",
+    "regexp",
+    "regular expressions"
+  ],
+  "homepage": "https://github.com/yyytcool/rexx",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yyytcool/rexx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yyytcool/rexx/issues"
+  },
+  "main": "dist/rexx.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "yyytcool",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "npx eslint --ext .js,.html .",
+    "lint:fix": "npx eslint --ext .js,.html --fix .",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.23.7",
+    "babel-jest": "^29.7.0",
+    "babel-loader": "^9.1.3",
+    "eslint": "^8.56.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.7.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Rexx Playground</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon"  href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2290%22>🦖</text></svg>">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <main>
+    <h1>
+      <span class="emoji">🦖</span> Rexx
+    </h1>
+    <h2>A human-friendly regex library with structured syntax and variable support.</h2>
+
+    <div class="github-link">
+      <a class="github-button" href="https://github.com/yyytcool/rexx" data-size="large"
+        aria-label="Star yyytcool/rexx on GitHub">Star</a>
+    </div>
+
+
+    <div class="editor-container">
+      <div class="code-editor" id="id-code-editor">
+        <button class="compile-button" id="id-button-compile">Compile</button>
+      </div>
+      <div class="code-preview" id="id-code-preview"></div>
+    </div>
+
+    <h2>Cheat sheet</h2>
+    <table>
+      <tr>
+        <th>Rexx</th>
+        <th>RegExp</th>
+        <th></th>
+        <th>Rexx</th>
+        <th>RegExp</th>
+      </tr>
+      <tr>
+        <td>one_of { 'a', 'b', 'c' }</td>
+        <td>[abc]</td>
+        <td></td>
+        <td>word</td>
+        <td>\w</td>
+      </tr>
+      <tr>
+        <td>one_of { 'foo', 'bar' }</td>
+        <td>foo|bar</td>
+        <td></td>
+        <td>non_word</td>
+        <td>\W</td>
+      </tr>
+      <tr>
+        <td>one_of { range {'a', 'z'} }</td>
+        <td>[a-z]</td>
+        <td></td>
+        <td>digit</td>
+        <td>\d</td>
+      </tr>
+      <tr>
+        <td>optional {'a'} / loop(0..1) {'a'} </td>
+        <td>a?</td>
+        <td></td>
+        <td>non_digit</td>
+        <td>\D</td>
+      </tr>
+      <tr>
+        <td>optional {'abc'}</td>
+        <td>(?:abc)?</td>
+        <td></td>
+        <td>whitespace</td>
+        <td>\s</td>
+      </tr>
+      <tr>
+        <td>loop(0..) {'a'}</td>
+        <td>a*</td>
+        <td></td>
+        <td>non_whitespace</td>
+        <td>\S</td>
+      </tr>
+      <tr>
+        <td>one_or_more {'a'} / loop(1..) {'a'}</td>
+        <td>a+</td>
+        <td></td>
+        <td>boundary</td>
+        <td>\b</td>
+      </tr>
+      <tr>
+        <td>loop(2) {'a'}</td>
+        <td>a{2}</td>
+        <td></td>
+        <td>non_boundary</td>
+        <td>\B</td>
+      </tr>
+      <tr>
+        <td>loop(2..3) {'a'}</td>
+        <td>a{2,3}</td>
+        <td></td>
+        <td>chinese</td>
+        <td>[\u4e00-\u9fa5]</td>
+      </tr>
+      <tr>
+        <td>except {'a'}</td>
+        <td>[^a]</td>
+        <td></td>
+        <td>'\\d'</td>
+        <td>\d</td>
+      </tr>
+      <tr>
+        <td>except { range {'a', 'z'} }</td>
+        <td>[^a-z]</td>
+        <td></td>
+        <td>'\\uffff'</td>
+        <td>\uffff</td>
+      </tr>
+      <tr>
+        <td>group{'foo'}</td>
+        <td>(foo)</td>
+        <td></td>
+        <td>newline</td>
+        <td>\n</td>
+      </tr>
+      <tr>
+        <td>group('year'){'2024'}</td>
+        <td>(?&lt;year&gt;2024)</td>
+        <td></td>
+        <td>tab</td>
+        <td>\t</td>
+      </tr>
+      <tr>
+        <td>ref {1}</td>
+        <td>\1</td>
+        <td></td>
+        <td>any</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>ref {year}</td>
+        <td>\k&lt;year&gt;</td>
+        <td></td>
+        <td>begin</td>
+        <td>^</td>
+      </tr>
+      <tr>
+        <td>followed_by {'a'}</td>
+        <td>(?=a)</td>
+        <td></td>
+        <td>end</td>
+        <td>$</td>
+      </tr>
+      <tr>
+        <td>not_followed_by {'a'}</td>
+        <td>(?!a)</td>
+        <td></td>
+        <td>global</td>
+        <td>g</td>
+      </tr>
+      <tr>
+        <td>preceded_by {'a'}</td>
+        <td>(?&lt;=)</td>
+        <td></td>
+        <td>ignore_case</td>
+        <td>i</td>
+      </tr>
+      <tr>
+        <td>not_preceded_by {'a'}</td>
+        <td>(?&lt;!)</td>
+        <td></td>
+        <td>multiline</td>
+        <td>m</td>
+      </tr>
+      <tr>
+        <td>loop (1..) {'a'} lazy</td>
+        <td>a+?</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </main>
+
+  <script src="https://www.unpkg.com/rexx"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+  <script src="./index.js"></script>
+  <script src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>
